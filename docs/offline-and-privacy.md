@@ -8,19 +8,22 @@ Technical specification for zero-egress, 100% on-device operation, storage bound
 
 ---
 
-## 1. Core Principle: Zero Data Egress
+## 1. Core Principle: Offline After One-Time Model Download
 
-SketchCode is built on a zero-trust, zero-egress architecture. Once installed, the application never transmits user sketches, speech audio, generated specifications, or telemetry outside the local device.
+SketchCode is built to run entirely offline once initialized. The application requires an initial network connection for a one-time download of quantized model weights (~1 GB total). Once cached into the browser's persistent storage, the entire tool functions 100% offline with zero external network calls.
 
 ```
+[One-Time Setup: Download & Cache Models (~1 GB)]
+                        |
+                        v
 +-------------------------------------------------------------+
-|                      iQOO Smartphone                        |
+|               iQOO Smartphone (100% Offline Mode)           |
 |                                                             |
 |  [ Camera ]    --> [ Memory Canvas ]     --> (In-Memory)   |
 |  [ Microphone] --> [ 16kHz PCM Buffer ]  --> (WASM Worker) |
 |  [ Sketch Spec]--> [ Local IndexedDB ]   --> (Device Only) |
 |                                                             |
-|  XXXXXXXXXXXXXXXX NO NETWORK TRAFFIC XXXXXXXXXXXXXXXX       |
+|  XXXXXXXXXXXX ZERO TRAFFIC (POST-DOWNLOAD) XXXXXXXXXXXX    |
 +-------------------------------------------------------------+
 ```
 
@@ -50,7 +53,7 @@ Running AI models locally requires a deliberate approach to weight delivery, esp
 | Component | Target Model | Quantization | Approximate Storage | Execution Target |
 | :--- | :--- | :--- | :--- | :--- |
 | **Vision / OCR** | Tesseract.js WASM + Eng/Traineddata | Compact WASM | ~18 MB | CPU (WebAssembly) |
-| **Speech-to-Text** | Whisper-tiny (Multilingual) | ONNX int8 | ~42 MB | CPU / Web Worker |
+| **Speech-to-Text** | Whisper-tiny (English primary, Tamil experimental) | ONNX int8 | ~42 MB | CPU / Web Worker |
 | **LLM Engine** | Qwen 2.5 1.5B or Gemma 2 2B | q4f16_1 (WebLLM) | ~950 MB | GPU via WebGPU |
 | **Application Bundle**| Vite + React + Lucide Icons | Brotli compressed | ~1.8 MB | Service Worker |
 

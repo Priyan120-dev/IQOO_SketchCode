@@ -22,7 +22,7 @@ Build SketchCode as an installable Progressive Web App (PWA) using Vite and mode
   - Native hardware acceleration via WebGPU (Direct Adreno GPU / Snapdragon compute).
   - Cross-platform portability (runs identically on phone and paired desktop).
 - **Trade-offs**:
-  - Direct low-level NPU (Hexagon DSP) access via Android NDK is not directly accessible through web standards without WebNN; relies on WebGPU shaders as the compute layer.
+  - Direct low-level NPU (Hexagon DSP) access via Android NDK is not directly accessible through web standards without WebNN. NPU targeting is a stretch goal; WebGPU compute shaders on the Adreno GPU provide the reliable baseline.
   - Browser memory limits (typically 2GB–4GB per tab) require strict memory management for model weights.
 
 ---
@@ -37,48 +37,48 @@ Prohibit free-form code output. Constrain the local model's output strictly to a
 
 ### Consequences & Trade-offs
 - **Positives**:
-  - **Zero Compilation Failures**: Eliminates runtime syntax errors and infinite loops on user devices.
+  - **Predictable Error Handling**: Schema validation catches malformed output; invalid output falls back to a safe default rather than crashing the entire app.
   - **Security**: Eliminates arbitrary code execution (`eval()`, dynamic scripts) in the preview environment.
-  - **Reliability on Small Models**: The local model only fills well-defined schema slots, achieving near-perfect structural validity.
+  - **Reliability on Small Models**: The local model only fills well-defined schema slots, dramatically improving completion success.
 - **Trade-offs**:
   - Constrained to standard mobile layouts; custom canvases or bespoke animations are deferred to desktop export.
 
 ---
 
-## ADR 003: 100% On-Device Inference over Cloud API Infrastructure
+## ADR 003: On-Device Inference (Offline After One-Time Model Download)
 
 ### Context
 SketchCode addresses the real-world friction experienced by students and mobile-first developers in India: spotty 4G/5G connections, depleted mobile data packs, high cloud API subscription costs, and sensitive early-stage IP privacy.
 
 ### Decision
-All perception, speech transcription, language modeling, and rendering steps must run entirely on the user's iQOO device with zero remote server calls.
+All perception, speech transcription, language modeling, and rendering steps run on the user's iQOO device, operating completely offline after a one-time initial model download.
 
 ### Consequences & Trade-offs
 - **Positives**:
   - **Zero Operating Cost**: No monthly API billing, no server hosting bills, completely free for students.
-  - **True Offline Capability**: Works reliably on trains, rural regions, college labs, and during power outages.
+  - **Offline After Setup**: Once weights are cached, works reliably on trains, rural regions, college labs, and during power outages.
   - **Total Privacy**: User sketches, voice clips, and app concepts never leave the physical device.
 - **Trade-offs**:
-  - Initial one-time asset cache (model weights) requires a few hundred megabytes of local storage.
+  - Initial one-time asset cache (model weights) requires ~1 GB download on Wi-Fi/hotspot.
   - Peak battery consumption during generation cycles.
 
 ---
 
-## ADR 004: Whisper-Tiny (Transformers.js / ONNX) for Speech Recognition
+## ADR 004: Whisper-Tiny for Speech (English Primary, Tamil Experimental)
 
 ### Context
-Users must be able to describe interaction intent casually using speech in Tamil or English without sending raw audio to cloud speech endpoints (e.g., Google Cloud Speech, OpenAI Whisper API).
+Users should be able to describe interaction intent casually using speech in English or Tamil without sending raw audio to cloud speech endpoints (e.g., Google Cloud Speech, OpenAI Whisper API).
 
 ### Decision
-Use quantized `whisper-tiny` packaged in ONNX format via `@xenova/transformers` running inside a dedicated background Web Worker.
+Use quantized `whisper-tiny` packaged in ONNX format via `@xenova/transformers` running inside a dedicated background Web Worker, treating English as primary and Tamil as experimental.
 
 ### Consequences & Trade-offs
 - **Positives**:
   - Compact footprint (~39MB–75MB quantized), fitting comfortably within mobile RAM budgets.
-  - Multilingual support for English and major Indian languages including Tamil.
+  - English transcription is relatively robust for simple app commands.
   - Isolated thread execution prevents UI thread stuttering during voice recording.
 - **Trade-offs**:
-  - Lower transcription accuracy on heavy background street noise compared to large 1.5B speech models. Handled by fallback intent buttons.
+  - Tamil transcription accuracy is limited on the tiny model variant and noisy environments. This is mitigated through on-screen intent chips and manual transcript touch-up.
 
 ---
 
@@ -103,17 +103,17 @@ Pass the extracted geometric metadata and tokens as text context to the 1.5B LLM
 
 ---
 
-## ADR 006: iQOO Office Kit Bridge over Cloud Collaboration
+## ADR 006: Planned Office Kit Bridge (To Be Validated)
 
 ### Context
 Users developing an idea on their phone eventually reach a stage where they want to open the full project in an IDE (e.g., VS Code) on a laptop for production backend coding. Traditional tools require setting up cloud sync accounts, Git repositories, and web authentication.
 
 ### Decision
-Leverage the native iQOO Office Kit desktop interconnect. When the user taps "Sync to Laptop", SketchCode packages the spec into a standard React + Tailwind project and transfers it locally via peer-to-peer Wi-Fi / USB bridge.
+Planned: explore syncing project files via iQOO Office Kit (to be validated during the Grand Finale). When the user taps "Sync to Laptop", SketchCode plans to serialize the spec into a standard React + Tailwind project and transfer it via local Office Kit file sharing or multi-device clipboard.
 
 ### Consequences & Trade-offs
 - **Positives**:
-  - Seamless hardware integration celebrating the iQOO multi-device ecosystem.
-  - Works without cloud credentials, internet connectivity, or remote accounts.
+  - Explores hardware ecosystem integration with iQOO laptops and tablets.
+  - Avoids cloud credentials, internet connectivity, or remote accounts.
 - **Trade-offs**:
-  - Requires the laptop to have iQOO Office Kit or a local browser peer connection active.
+  - The exact programmatic API and reliability of Office Kit file bridge for automated PWA handoff is unverified and will be validated during the hackathon. Local file download serves as the reliable fallback.

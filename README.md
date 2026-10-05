@@ -13,7 +13,7 @@
 ---
 
 ### Pitch
-**SketchCode** is an on-device AI developer tool that transforms a hand-drawn paper sketch and a voice command (Tamil or English) into an interactive, working app preview—using solely an iQOO phone with zero internet, zero cloud servers, and zero API costs.
+**SketchCode** is an on-device AI developer tool that transforms a hand-drawn paper sketch and a voice command (English primary, Tamil experimental) into an interactive, working app preview—using solely an iQOO phone, offline after a one-time model download, with zero cloud servers and zero API costs.
 
 ### Why This Exists
 Millions of aspiring developers and students across India have smartphones but lack personal laptops, home broadband, or credit cards for cloud APIs. Software developers also experience "Red Light phases"—moments during transit or away from desks when inspiration strikes. SketchCode removes the laptop barrier, turning ideas into runnable prototypes in the creator's native language immediately on their phone.
@@ -34,7 +34,7 @@ flowchart LR
 ### Sketch → Voice → Spec → App (Illustrative Example)
 
 1. **Sketch**: User draws an input box labeled `"item"`, an `"+ Add"` button, and a checklist container on paper.
-2. **Voice**: Spoken in Tamil: *"Oru grocery list app venum, item type panni Add click panna list la save aaganum."*
+2. **Voice**: Spoken in Tamil (experimental): *"Oru grocery list app venum, item type panni Add click panna list la save aaganum."*
 3. **Spec**: Generated on-device JSON specification:
 
 ```json
@@ -61,7 +61,7 @@ flowchart LR
 
 | Criterion | Free-Form Code Generation | SketchCode Constrained Spec |
 | :--- | :--- | :--- |
-| **Small Model (1.5B) Reliability** | High error rate; unclosed tags & broken imports | Guaranteed schema compliance; zero syntax errors |
+| **Small Model (1.5B) Reliability** | High error rate; unclosed tags & broken imports | Schema validation catches malformed output; invalid output falls back to a safe default |
 | **Runtime Safety** | Risk of infinite loops & unsafe script evaluation | Deterministic rendering with safe, fixed components |
 | **Self-Healing** | Difficult to auto-repair malformed JS on phone | Trivially linted and repaired via AST validation |
 
@@ -74,8 +74,8 @@ flowchart LR
 | **Sketch Capture** | High-resolution camera sensor with low-latency HTML5 canvas processing |
 | **Voice Processing** | Built-in microphone array with real-time 16kHz Web Audio downsampling |
 | **On-Device Inference** | Snapdragon Adreno GPU accelerated via WebGPU compute shaders |
-| **NPU Acceleration** | Architecture prepared for Snapdragon Hexagon NPU via WebNN standards |
-| **Laptop Bridge** | Direct peer-to-peer code handoff to desktop via iQOO Office Kit |
+| **NPU Acceleration** | NPU targeting is a stretch goal; WebGPU is the baseline |
+| **Laptop Bridge** | Planned: sync project files via Office Kit (to be validated) |
 
 ---
 
@@ -84,18 +84,18 @@ flowchart LR
 | Layer | Planned Technology (Open-Source) |
 | :--- | :--- |
 | **Vision & OCR** | Tesseract.js (WASM) + heuristic canvas contour extraction |
-| **Speech-to-Text** | Quantized Whisper-tiny via Transformers.js (Tamil & English support) |
+| **Speech-to-Text** | Quantized Whisper-tiny via Transformers.js (English primary, Tamil experimental) |
 | **Local Synthesis** | WebLLM running quantized Qwen 2.5 (1.5B) or Gemma 2 (2B) |
 | **App Renderer** | Fixed deterministic React component engine packaged as a Vite PWA |
-| **Desktop Sync** | iQOO Office Kit local P2P multi-device sync bridge |
+| **Desktop Sync** | Planned: sync project files via Office Kit (to be validated) |
 
 ---
 
 ### Roadmap
 
 - [ ] **Milestone 1**: Core On-Device Spec Engine & Deterministic Renderer
-- [ ] **Milestone 2**: Multimodal Input Pipeline (Camera OCR + Tamil/English Whisper)
-- [ ] **Milestone 3**: Live Phone Preview & iQOO Office Kit Bridge
+- [ ] **Milestone 2**: Multimodal Input Pipeline (Camera OCR + English/Tamil Whisper)
+- [ ] **Milestone 3**: Live Phone Preview & Office Kit Bridge Sync
 
 ---
 

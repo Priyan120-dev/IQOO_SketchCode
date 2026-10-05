@@ -30,7 +30,7 @@
 > What if the only development machine you needed was already in your pocket?
 > 
 > This is **SketchCode**. Our motto is simple: **Sketch it. Say it. Run it.** 
-> It is an on-device AI tool that turns a hand-drawn sketch and a voice command in Tamil or English into an interactive, running application preview—right on an iQOO phone, with zero internet, zero cloud dependencies, and zero monthly subscriptions."
+> It is an on-device AI tool that turns a hand-drawn sketch and a voice command (English primary, Tamil experimental) into an interactive, running application preview—right on an iQOO phone, offline after a one-time model download, with zero cloud dependencies and zero API subscriptions."
 
 ---
 
@@ -38,17 +38,17 @@
 
 *(Presenter mirrors the iQOO phone screen to the main hall projector. Presenter pulls down the quick settings shade to show Airplane Mode enabled).*
 
-> "Notice my phone is in Airplane Mode. No cloud servers are helping us today.
+> "Notice my phone is in Airplane Mode. Once the model weights were cached, no cloud servers are needed.
 > 
 > **Step 1: The Sketch.**  
 > Here is a rough sketch on notebook paper of a grocery checklist app called 'Grocery Quick'. I open SketchCode, point the camera, and snap a photo. In less than 200 milliseconds, on-device computer vision detects the rectangular input box, the action button, and the list container.
 > 
 > **Step 2: The Voice Command.**  
-> Now, instead of writing complex logic, I hold down the microphone button and describe what I want in Tamil:
+> Now, instead of writing complex logic, I hold down the microphone button and describe what I want in Tamil (or English):
 > 
 > *'Oru grocery list app venum, item type panni Add click panna list la save aaganum.'*
 > 
-> Whisper-tiny runs locally on this device via Transformers.js, immediately transcribing the audio.
+> Whisper-tiny runs locally on this device via Transformers.js, transcribing the audio, with fallback intent chips ready if background noise interferes.
 > 
 > **Step 3: The Live App.**  
 > I tap Generate. Our on-device language model running over WebGPU synthesizes the vision tokens and spoken intent into a clean, validated JSON UI specification. 
@@ -69,11 +69,11 @@
 > 
 > So we invented a **constrained architectural pipeline**:
 > 1. The local model is mathematically constrained by a formal grammar mask. It is only allowed to output our strict **SketchCode UI Schema**—a finite set of 7 verified components.
-> 2. A deterministic client-side renderer turns that spec into live UI components. Zero syntax errors, zero arbitrary script execution, 100% crash-free.
+> 2. A deterministic client-side renderer turns that spec into live UI components. Schema validation catches malformed output, and invalid structures fall back to safe defaults rather than crashing.
 > 
 > And when you are ready to take this to production?
 > 
-> I tap **'Sync to Laptop'**. Using the **iQOO Office Kit** local bridge, the validated spec is compiled into standard React and Tailwind code, appearing instantly in VS Code on my paired laptop without touching any cloud repository."
+> I tap **'Sync to Laptop'**. Through our planned **iQOO Office Kit** bridge, the validated spec is packaged into standard React and Tailwind code, ready for desktop handoff without touching any cloud repository."
 
 ---
 
@@ -85,7 +85,7 @@
 > 
 > It empowers the student in a rural college hostel, the commuter on the train, and the developer working in Red Light moments to turn inspiration into working software within seconds.
 > 
-> No laptop required. No internet required.
+> No laptop required. Offline once downloaded.
 > 
 > **Sketch it. Say it. Run it.**
 > 
@@ -97,6 +97,6 @@
 
 | Question | Planned Response |
 | :--- | :--- |
-| **Why not generate full React Native or Flutter code directly?** | Small on-device models (1.5B–2B) have high error rates on free-form code. Our constrained JSON spec guarantees a 100% executable UI with zero syntax failures. Full code export is generated deterministically when syncing to the laptop. |
-| **How does it perform on non-English speech?** | We use multilingual Whisper-tiny, which handles Tamil phonetics effectively. For noisy environments, we provide 1-tap intent chips as a deterministic fallback. |
-| **How does iQOO hardware give this an advantage?** | SketchCode relies heavily on Snapdragon Adreno GPU acceleration for WebGPU tensor arithmetic and iQOO Office Kit for seamless desktop handoff. |
+| **Why not generate full React Native or Flutter code directly?** | Small on-device models (1.5B–2B) have high error rates on free-form code. Our constrained JSON spec ensures schema validation catches malformed output and falls back to safe defaults, avoiding syntax crashes. Full code export is generated deterministically when syncing to the laptop. |
+| **How does it perform on non-English speech?** | We use quantized Whisper-tiny with English as primary and Tamil as experimental. For noisy or ambiguous speech, we provide 1-tap intent chips as a deterministic fallback. |
+| **How does iQOO hardware give this an advantage?** | SketchCode relies on Snapdragon Adreno GPU acceleration for WebGPU compute as baseline (with NPU as a stretch goal), and explores planned iQOO Office Kit integration for seamless desktop handoff. |

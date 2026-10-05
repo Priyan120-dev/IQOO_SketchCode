@@ -35,14 +35,14 @@ flowchart TD
     end
 
     subgraph Bridge_Layer ["Handoff Layer"]
-        OfficeKit["iQOO Office Kit Sync Bridge<br/>(Local P2P File & Clipboard Sync)"]
+        OfficeKit["Planned Office Kit Sync<br/>(Local File Bridge - To Be Validated)"]
         IDE["Laptop Developer Environment<br/>(VS Code / React Project Tree)"]
     end
 
     Cam --> OCR
     Mic --> ASR
     OCR -->|"Visual Elements & Labels"| WebLLM
-    ASR -->|"Spoken Intent (Tamil/English)"| WebLLM
+    ASR -->|"Spoken Intent (English primary, Tamil exp)"| WebLLM
     WebLLM --> Grammar
     Grammar -->|"Validated UI Spec JSON"| Renderer
     Renderer --> PWA
@@ -59,7 +59,7 @@ The pipeline translates non-deterministic user inputs (rough handwriting, loose 
 ```mermaid
 flowchart LR
     A["Raw Sketch Photo<br/>(Bitmap)"] --> B["Spatial Elements<br/>{type, bbox, text}"]
-    C["Voice Audio<br/>(PCM Stream)"] --> D["Intent String<br/>(Tamil / English)"]
+    C["Voice Audio<br/>(PCM Stream)"] --> D["Intent String<br/>(English / Tamil exp)"]
     
     B --> E["Prompt Context Assembly"]
     D --> E
@@ -143,7 +143,7 @@ sequenceDiagram
 - **Handling**: Falls back to geometric bounding boxes with empty labels. If OCR confidence is low, sets placeholder text like `"Untitled Button"` or `"Input Field"` rather than crashing.
 
 ### 4.3 On-Device Speech Recognizer (Whisper-tiny via Transformers.js)
-- **Responsibility**: Runs a quantized Whisper-tiny model inside a dedicated Web Worker using ONNX runtime WASM. Accepts Tamil and English audio, returning raw text.
+- **Responsibility**: Runs a quantized Whisper-tiny model inside a dedicated Web Worker using ONNX runtime WASM. Transcribes spoken English (primary) and Tamil (experimental) audio into intent text.
 - **Failure Mode**: Heavy background noise, low microphone input, or mixed dialect idioms.
 - **Handling**: Returns low-confidence warning. The UI allows the user to inspect the transcribed text and quickly tap quick-intent chips (e.g., `"List App"`, `"Form with Action"`) if speech recognition fails.
 
@@ -162,7 +162,7 @@ sequenceDiagram
 - **Failure Mode**: Target screen not found during navigation action.
 - **Handling**: Gracefully navigates to the default initial screen with a non-intrusive toast alert. Completely avoids `eval()` or dynamic code injection.
 
-### 4.7 iQOO Office Kit Bridge
-- **Responsibility**: Serializes the validated UI specification into a clean, idiomatic React + Tailwind source code directory structure. Sends the bundle over local Wi-Fi / peer-to-peer connection via the iQOO Office Kit protocol.
-- **Failure Mode**: Laptop not paired or local network disconnected.
-- **Handling**: Saves the export package locally in browser IndexedDB/Cache storage and offers a single-file zip download.
+### 4.7 Planned iQOO Office Kit Bridge (To Be Validated)
+- **Responsibility**: Serializes the validated UI specification into a clean, idiomatic React + Tailwind source code directory structure. Plans to explore sending the bundle over local Wi-Fi / peer-to-peer connection via the iQOO Office Kit protocol (to be validated during the Grand Finale).
+- **Failure Mode**: Laptop not paired, local network disconnected, or Office Kit file handoff API unexposed to PWAs.
+- **Handling**: Saves the export package locally in browser IndexedDB/Cache storage and offers a single-file zip download as the primary proven fallback.

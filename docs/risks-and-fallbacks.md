@@ -16,10 +16,11 @@ Building an entirely on-device, multimodal developer tool on mobile hardware inv
 | :--- | :--- | :--- | :--- | :--- |
 | **Handwriting OCR on Messy Sketches** | High | Medium | Grayscale contrast binarization; bounding box heuristic filtering. | If text confidence is <40%, keep the detected bounding box but insert a generic placeholder (e.g., `"Button 1"`). Let user edit label via one-tap rename. |
 | **Slow Local Model Inference Latency** | Medium | High | Use quantized 4-bit weights (`q4f16_1`); restrict maximum output generation to 512 tokens. | Stream tokens progressively into an AST parser. If generation exceeds 15 seconds, offer a fast rule-based template synthesizer. |
-| **Speech Accuracy in Tamil / Mixed Idioms** | Medium | Medium | Use multilingual Whisper-tiny fine-tuned on common Indian accent benchmarks; trim silence. | Display real-time transcription chips. If transcription is ambiguous, display 4 quick-intent buttons (e.g., `+ List App`, `+ Form`, `+ Counter`). |
+| **Speech Accuracy in Tamil / Mixed Idioms** | Medium | Medium | English primary, Tamil experimental. Use quantized Whisper-tiny; trim background silence. | Display real-time transcription chips. If transcription is ambiguous, display 4 quick-intent buttons (e.g., `+ List App`, `+ Form`, `+ Counter`). |
 | **Mobile RAM Limits & WebGPU OOM Crashes** | Medium | High | Run OCR, Whisper, and WebLLM sequentially rather than concurrently to keep peak memory <1.8 GB. | If WebGPU allocation fails, fall back to lightweight WASM CPU execution or reduce model context window to 1024 tokens. |
-| **Snapdragon NPU Targeting Uncertainty** | High | Low | Primary execution targets WebGPU shaders (which run reliably on the Adreno GPU). | Do not rely on experimental proprietary NPU drivers. Treat WebNN / NPU acceleration as a bonus enhancement, not a hard requirement. |
+| **Snapdragon NPU Targeting Uncertainty** | High | Low | NPU targeting is a stretch goal; WebGPU on the Adreno GPU is the baseline. | Do not rely on experimental proprietary NPU drivers. Treat WebNN / NPU acceleration as a bonus enhancement, not a hard requirement. |
 | **Thermal Throttling & Battery Consumption** | Medium | Medium | Restrict AI execution to discrete bursts (1–3 seconds per generation pass); power down workers when idle. | Prevent continuous background polling. Cap inference duty cycle; display a battery advisory if device charge is below 15%. |
+| **Office Kit Sync Integration** | Medium | Low | Planned: sync project files via Office Kit (to be validated during Grand Finale). | If browser-to-Office Kit handoff is restricted, fall back to standard local .zip / project directory download. |
 
 ---
 

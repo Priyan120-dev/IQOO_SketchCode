@@ -75,12 +75,12 @@
     <rect x="0" y="0" width="600" height="106" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
     <rect x="16" y="14" width="70" height="22" rx="6" fill="#A855F7"/>
     <text x="51" y="29" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 03</text>
-    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Voice Intent Recognition (Tamil / English)</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Voice Intent (English primary, Tamil exp)</text>
     <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
       Engine: Whisper tiny (quantized ONNX) via Transformers.js in Web Worker.
     </text>
     <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
-      Payload: Transcribed intent string (e.g., &quot;Oru grocery list app venum...&quot;).
+      Payload: Transcribed intent string (with 1-tap fallback intent chips).
     </text>
   </g>
 
@@ -94,7 +94,7 @@
     <text x="51" y="29" fill="#0A0D14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 04</text>
     <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Constrained LLM Spec Engine (WebLLM)</text>
     <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
-      Model: Qwen 2.5 / Gemma 2B quantized via WebGPU on Snapdragon Adreno/NPU.
+      Model: Qwen 2.5 / Gemma 2B on WebGPU (Adreno baseline, NPU stretch goal).
     </text>
     <text x="16" y="80" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
       Grammar Mask: Enforces strict JSON Schema (screens, inputs, buttons, lists).
@@ -129,12 +129,12 @@
     <rect x="0" y="0" width="600" height="106" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
     <rect x="16" y="14" width="70" height="22" rx="6" fill="#3B82F6"/>
     <text x="51" y="29" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 06</text>
-    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">iQOO Office Kit Phone-to-Laptop Bridge</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Planned: Office Kit Sync (To Be Validated)</text>
     <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
-      Ecosystem: iQOO Office Kit local P2P wireless clipboard &amp; multi-screen sync.
+      Ecosystem: Planned file sync via Office Kit (zip/directory export fallback).
     </text>
     <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
-      Deliverable: Exportable React/Tailwind boilerplate bundle synced directly into laptop IDE.
+      Deliverable: Exportable React/Tailwind boilerplate bundle synced to laptop IDE.
     </text>
   </g>
 
@@ -142,7 +142,7 @@
   <g transform="translate(100, 955)">
     <rect x="0" y="0" width="600" height="34" rx="8" fill="#131B28" stroke="#1F2C42" stroke-width="1"/>
     <text x="300" y="21" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="500" text-anchor="middle">
-      100% On-Device Processing • Zero External Network Calls • No Cloud API Dependency
+      Offline After One-Time Download • Zero Egress • No Cloud API Dependency
     </text>
   </g>
 </svg>
