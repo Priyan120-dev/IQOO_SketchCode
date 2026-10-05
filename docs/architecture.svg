@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1020" width="800" height="1020">
+  <defs>
+    <linearGradient id="archBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0E14"/>
+      <stop offset="100%" stop-color="#141923"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1B2230"/>
+      <stop offset="100%" stop-color="#121722"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD000"/>
+      <stop offset="100%" stop-color="#FF9100"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="800" height="1020" fill="url(#archBg)"/>
+
+  <!-- Title & Metadata -->
+  <g transform="translate(50, 40)">
+    <rect x="0" y="0" width="160" height="22" rx="11" fill="#FFB300" fill-opacity="0.12" stroke="#FFB300" stroke-width="1"/>
+    <text x="12" y="15" fill="#FFB300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" letter-spacing="1">SYSTEM PIPELINE</text>
+    <text x="0" y="52" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="800">
+      Sketch<tspan fill="url(#goldAccent)">Code</tspan> 6-Step On-Device Architecture
+    </text>
+    <text x="0" y="74" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">
+      100% Offline Multi-modal Prototyping Pipeline • Author: Priyan
+    </text>
+  </g>
+
+  <!-- Central Connecting Spine Line -->
+  <line x1="400" y1="140" x2="400" y2="940" stroke="#2A364D" stroke-width="3" stroke-dasharray="6,4"/>
+
+  <!-- STEP 1: CAMERA CAPTURE -->
+  <g transform="translate(100, 130)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="100" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
+    <!-- Step Badge -->
+    <rect x="16" y="14" width="70" height="22" rx="6" fill="#FFB300"/>
+    <text x="51" y="29" fill="#0A0D14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 01</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Camera Image Capture</text>
+    <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Hardware: iQOO primary camera sensor via HTML5 Canvas &amp; Web MediaStream API.
+    </text>
+    <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
+      Payload: High-resolution downsampled bitmap (1080x1920 @ 300 DPI threshold).
+    </text>
+  </g>
+
+  <!-- Flow Connector 1 -> 2 -->
+  <polygon points="395,242 405,242 400,252" fill="#FFB300"/>
+
+  <!-- STEP 2: ON-DEVICE OCR & SHAPE DETECTION -->
+  <g transform="translate(100, 260)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="106" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
+    <rect x="16" y="14" width="70" height="22" rx="6" fill="#38BDF8"/>
+    <text x="51" y="29" fill="#0A0D14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 02</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">OCR &amp; Shape Boundary Detection</text>
+    <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Engine: Tesseract.js (WASM) + heuristic contour geometry for input/button boxes.
+    </text>
+    <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
+      Payload: Spatial layout coordinates [x, y, w, h] + raw text labels &amp; placeholder tokens.
+    </text>
+  </g>
+
+  <!-- Flow Connector 2 -> 3 -->
+  <polygon points="395,378 405,378 400,388" fill="#38BDF8"/>
+
+  <!-- STEP 3: ON-DEVICE SPEECH-TO-TEXT -->
+  <g transform="translate(100, 396)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="106" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
+    <rect x="16" y="14" width="70" height="22" rx="6" fill="#A855F7"/>
+    <text x="51" y="29" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 03</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Voice Intent Recognition (Tamil / English)</text>
+    <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Engine: Whisper tiny (quantized ONNX) via Transformers.js in Web Worker.
+    </text>
+    <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
+      Payload: Transcribed intent string (e.g., &quot;Oru grocery list app venum...&quot;).
+    </text>
+  </g>
+
+  <!-- Flow Connector 3 -> 4 -->
+  <polygon points="395,514 405,514 400,524" fill="#A855F7"/>
+
+  <!-- STEP 4: CONSTRAINED LOCAL LLM SPEC ENGINE -->
+  <g transform="translate(100, 532)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="120" rx="12" fill="url(#cardBg)" stroke="#FFB300" stroke-width="2"/>
+    <rect x="16" y="14" width="70" height="22" rx="6" fill="url(#goldAccent)"/>
+    <text x="51" y="29" fill="#0A0D14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 04</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Constrained LLM Spec Engine (WebLLM)</text>
+    <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Model: Qwen 2.5 / Gemma 2B quantized via WebGPU on Snapdragon Adreno/NPU.
+    </text>
+    <text x="16" y="80" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Grammar Mask: Enforces strict JSON Schema (screens, inputs, buttons, lists).
+    </text>
+    <text x="16" y="100" fill="#10B981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">
+      Self-Healing Loop: Schema validation check; auto-repaired if malformed.
+    </text>
+  </g>
+
+  <!-- Flow Connector 4 -> 5 -->
+  <polygon points="395,664 405,664 400,674" fill="#10B981"/>
+
+  <!-- STEP 5: FIXED DETERMINISTIC RENDERER -->
+  <g transform="translate(100, 682)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="106" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
+    <rect x="16" y="14" width="70" height="22" rx="6" fill="#10B981"/>
+    <text x="51" y="29" fill="#0A0D14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 05</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Fixed Deterministic PWA Renderer</text>
+    <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Engine: Safe React component dictionary (Navbar, Input, Button, List, Screen).
+    </text>
+    <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
+      Output: Zero arbitrary code execution; instant interactive preview in phone viewport.
+    </text>
+  </g>
+
+  <!-- Flow Connector 5 -> 6 -->
+  <polygon points="395,800 405,800 400,810" fill="#3B82F6"/>
+
+  <!-- STEP 6: iQOO OFFICE KIT BRIDGE -->
+  <g transform="translate(100, 818)" filter="url(#shadow)">
+    <rect x="0" y="0" width="600" height="106" rx="12" fill="url(#cardBg)" stroke="#2E3A4E" stroke-width="1.5"/>
+    <rect x="16" y="14" width="70" height="22" rx="6" fill="#3B82F6"/>
+    <text x="51" y="29" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 06</text>
+    <text x="96" y="30" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">iQOO Office Kit Phone-to-Laptop Bridge</text>
+    <text x="16" y="62" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">
+      Ecosystem: iQOO Office Kit local P2P wireless clipboard &amp; multi-screen sync.
+    </text>
+    <text x="16" y="82" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">
+      Deliverable: Exportable React/Tailwind boilerplate bundle synced directly into laptop IDE.
+    </text>
+  </g>
+
+  <!-- Bottom Privacy & Constraint Banner -->
+  <g transform="translate(100, 955)">
+    <rect x="0" y="0" width="600" height="34" rx="8" fill="#131B28" stroke="#1F2C42" stroke-width="1"/>
+    <text x="300" y="21" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="500" text-anchor="middle">
+      100% On-Device Processing • Zero External Network Calls • No Cloud API Dependency
+    </text>
+  </g>
+</svg>
